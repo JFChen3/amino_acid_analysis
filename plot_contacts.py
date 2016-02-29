@@ -29,7 +29,7 @@ def plot_all(args):
         os.chdir("contact_plots")
         
         CACB_magnitude(pairs, params, res_index, atom_type, iter=i)
-        polarity_magnitude(pairs, params, res_index, res_id, iter=i)
+        polarity_magnitude(pairs, params, res_index, atom_type, res_id, iter=i)
         CB_contact_type(pairs, params, res_index, atom_type, res_id, iter=i)
 
 ###Convenience functions to generate specific types of plots
@@ -45,7 +45,7 @@ def CACB_magnitude(pairs, params, res_index, atom_type, iter=0):
     #Plot spreads
     analysis.plot_spread((ca_params, cb_params), ("CA", "CB"), title="Epsilon Spread", savename="cacb_eps_spread_iter_%.0f.png"%iter)
 
-def polarity_magnitude(pairs, params, res_index, res_id, iter=0):
+def polarity_magnitude(pairs, params, res_index, atom_type, res_id, iter=0):
     """Plot magnitude of hydrophobic epsilons in upper triangle, magnitude of hydrogen bonding epsilons in lower triangle"""
     
     ca_pairs, ca_params, cb_pairs, cb_params = analysis.separate_cacb(pairs, params, atom_type)
