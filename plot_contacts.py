@@ -62,7 +62,7 @@ def CB_contact_type(pairs, params, res_index, atom_type, res_id, iter=0):
     
     ca_pairs, ca_params, cb_pairs, cb_params = analysis.separate_cacb(pairs, params, atom_type)
     cb_res_index = analysis.get_residue_indices(cb_pairs, res_index)
-    contact_type = sort_polarity(cb_pairs, res_id)
+    contact_type = analysis.sort_polarity(cb_pairs, res_id)
     
     analysis.plot_color(cb_res_index, cb_res_index, cb_params, contact_type, title="Iteration %.0f"%iter, savename="contact_types_iter%.0f"%iter)
 
