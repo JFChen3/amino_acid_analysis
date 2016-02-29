@@ -46,9 +46,11 @@ def CACB_magnitude(pairs, params, res_index, atom_type, iter=0):
     analysis.plot_spread((ca_params, cb_params), ("CA", "CB"), title="Epsilon Spread", savename="cacb_eps_spread_iter_%.0f.png"%iter)
 
 def polarity_magnitude(pairs, params, res_index, res_id, iter=0):
-    """Plot magnitude of hydrophobic epsilons in uppper triangle, magnitude of hydrogen bonding epsilons in lower triangle"""
+    """Plot magnitude of hydrophobic epsilons in upper triangle, magnitude of hydrogen bonding epsilons in lower triangle"""
     
-    hydrophobic_pairs, hydrophobic_params, hbond_pairs, hbond_params = analysis.separate_polarity(pairs, params, res_id=res_id)
+    ca_pairs, ca_params, cb_pairs, cb_params = analysis.separate_cacb(pairs, params, atom_type)
+
+    hydrophobic_pairs, hydrophobic_params, hbond_pairs, hbond_params = analysis.separate_polarity(cb_pairs, cb_params, res_id=res_id)
     hydrophobic_res_index = analysis.get_residue_indices(hydrophobic_pairs, res_index)
     hbond_res_index = analysis.get_residue_indices(hbond_pairs, res_index)
 

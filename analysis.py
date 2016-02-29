@@ -89,6 +89,8 @@ def separate_cacb(pairs, params, atom_type):
         else:
             raise ValueError("Atom not CA or CB")
 
+    print "Found %.0f CA and %.0f CB contacts"%(ca_count, cb_count)
+    
     ca_pairs = np.reshape(ca_pairs, (ca_count,2)) #Reshape into nx2 matrices
     cb_pairs = np.reshape(cb_pairs, (cb_count,2))
 
@@ -127,7 +129,8 @@ def separate_polarity(pairs, params, contact_type=None, res_id=None):
             other_count += 1
         else:
             raise ValueError("Invalid entries in contact_type")
-
+    
+    print "Found %.0f hydrophobic and %.0f hydrogen bond contacts"%(hydrophobic_count, hbond_count)
     print "%.0f contacts not characterized as hydrophobic or hydrogen bond"%other_count
     
     hydrophobic_pairs = np.reshape(hydrophobic_pairs, (hydrophobic_count,2)) #Reshape into nx2 matrices
