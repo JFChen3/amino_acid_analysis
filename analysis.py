@@ -123,8 +123,10 @@ def separate_polarity(pairs, params, contact_type=None, res_id=None):
             hbond_pairs.append(pairs[i,:])
             hbond_params.append(params[i])
             hbond_count += 1
-        else:
+        elif contact_type[i] == 1:
             other_count += 1
+        else:
+            raise ValueError("Invalid entries in contact_type")
 
     print "%.0f contacts not characterized as hydrophobic or hydrogen bond"%other_count
     
