@@ -17,7 +17,7 @@ def plot_all(args):
     for i in args.iter:
         #Find and load files
         os.chdir("%s/1PB7/iteration_%s/%s_0"%(cwd, args.iter[i], args.temp))
-        atom_index, res_index, atom_type, res_id = read_pdb("%s"%args.atom_file)
+        atom_index, res_index, atom_type, res_id = analysis.read_pdb("%s"%args.atom_file)
         pairs = np.loadtxt("%s"%args.pairs_file, usecols=(0, 1))
         params = np.loadtxt("%s"%args.params_file)
 
