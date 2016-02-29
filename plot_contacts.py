@@ -52,7 +52,7 @@ def polarity_magnitude(pairs, params, res_index, res_id, iter=0):
     hydrophobic_res_index = analysis.get_residue_indices(hydrophobic_pairs, res_index)
     hbond_res_index = analysis.get_residue_indices(hbond_pairs, res_index)
 
-    analysis.plot_color(hydrophobic_res_index, hbond_res_index, hydrophobic_params, hbond_params, title="Iteration %.0f"%iter, savename="epsilons_iter%.0f"%iter)
+    analysis.plot_color(hydrophobic_res_index, hbond_res_index, hydrophobic_params, hbond_params, title="Iteration %.0f"%iter, savename="polarity_epsilons_iter%.0f"%iter)
 
     #Plot spreads
     analysis.plot_spread((hydrophobic_params, hbond_params), ("Hydrophobic", "Hydrogen Bond"), title="Epsilon Spread", savename="polarity_eps_spread_iter_%.0f.png"%iter)

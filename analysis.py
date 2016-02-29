@@ -111,6 +111,7 @@ def separate_polarity(pairs, params, contact_type=None, res_id=None):
     #Count hydrophobic and hydrogen bond interactions
     hydrophobic_count = 0
     hbond_count = 0
+    other_count = 0
 
     for i in range(np.shape(pairs)[0]):
 
@@ -123,8 +124,10 @@ def separate_polarity(pairs, params, contact_type=None, res_id=None):
             hbond_params.append(params[i])
             hbond_count += 1
         else:
-            print "Contact between %.0f and %.0f not characterized as hydrophobic or hydrogen bond"%(pairs[i,0], pairs[i,1])
+            other_count += 1
 
+    print "%.0f contacts not characterized as hydrophobic or hydrogen bond"%other_count
+    
     hydrophobic_pairs = np.reshape(hydrophobic_pairs, (hydrophobic_count,2)) #Reshape into nx2 matrices
     hbond_pairs = np.reshape(hbond_pairs, (hbond_count,2))
     
