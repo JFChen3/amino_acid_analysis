@@ -1,2 +1,6 @@
-#import amino_acid_analysis
-#import properties
+import matplotlib
+matplotlib.use("Agg")
+
+import analysis
+import properties
+import plot_contacts
