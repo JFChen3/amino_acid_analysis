@@ -53,7 +53,7 @@ def sort_polarity(pairs, res_id):
     for i in range(n_pairs):
         if res_id[int(atom_i[i])-1] in hydrophobic_residues and res_id[int(atom_j[i])-1] in hydrophobic_residues:
             contact_type[i] -= 1 #Set hydrophobic interactions to 0
-        if res_id[int(atom_i[i])-1] in hbond_residues and res_id[int(atom_j[i])-1] in hbond_residues:
+        elif res_id[int(atom_i[i])-1] in hbond_residues and res_id[int(atom_j[i])-1] in hbond_residues:
             contact_type[i] += 1 #Set hydrogen bond interactions to 2
         else:
             pass #Set everything else to 1
@@ -78,11 +78,11 @@ def separate_cacb(pairs, params, atom_type):
         if not atom_type[int(pairs[i,0])-1] == atom_type[int(pairs[i,1])-1]:
             print "Warning: Found CA-CB contact between atoms %.0f and %.0f"%(pairs[i,0], pairs[i,1])
 
-        if atom_type[int(pairs[i,0])] == 'CA':
+        if atom_type[int(pairs[i,0])-1] == 'CA':
             ca_pairs.append(pairs[i,:])
             ca_params.append(params[i])
             ca_count += 1
-        elif atom_type[int(pairs[i,0])] == 'CB':
+        elif atom_type[int(pairs[i,0])-1] == 'CB':
             cb_pairs.append(pairs[i,:])
             cb_params.append(params[i])
             cb_count += 1

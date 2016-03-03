@@ -4,4 +4,4 @@
 hydrophobic_residues = ['ALA','GLY','ILE','LEU','MET','PHE','PRO','TRP','TYR','VAL']
 
 #Residues capable of hydrogen bonding
-hbond_residues = ['ARG','HIS','LYS','ASP','GLU','SER','THR','ASN','GLN']
+hbond_residues = ['ARG','HIS','LYS','ASP','GLU','SER','THR','ASN','GLN','TYR']
