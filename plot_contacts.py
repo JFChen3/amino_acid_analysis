@@ -90,7 +90,7 @@ def plot_color(pairs_U, pairs_L, params_U, params_L, title="Contacts", savename=
     cp = plt.scatter(x_U, y_U, s=6, c=z_U, marker='o', linewidth=0., vmin=zmin, vmax=zmax)
     cb = plt.colorbar(cp)
 
-    maxval = np.max(x_U)
+    maxval = np.max((x_U, x_L))
     plt.axis([0, maxval, 0, maxval])
     plt.xlabel("Residue i")
     plt.ylabel("Residue j")
