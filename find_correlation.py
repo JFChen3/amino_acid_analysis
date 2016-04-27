@@ -5,7 +5,7 @@ def generate_correlated_groups(contact_pairs, params_list):
     
     params_matrix = construct_params_matrix(params_list)
     cov_matrix = calc_covariance_matrix(params_matrix)
-    groups = group_contacts(cov_matrix, 0.9) ###Arbitrarily set Rmin to 0.9, set as argument later
+    groups = group_contacts(cov_matrix, 0.5) ###Arbitrarily set Rmin to 0.9, set as argument later
     pairs_plot, params_plot = get_plottable_contacts(contact_pairs, groups)
 
     return pairs_plot, params_plot
@@ -22,7 +22,8 @@ def calc_covariance_matrix(params_matrix):
     #Calculate normalized covariance matrix
         
     cov_matrix_normalized = np.corrcoef(params_matrix)
-    
+    np.savetxt("cov_matrix", cov_matrix_normalized)
+
     return cov_matrix_normalized
 
 def group_contacts(cov_matrix, R_min):
