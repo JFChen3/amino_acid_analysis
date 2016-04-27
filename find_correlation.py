@@ -21,7 +21,7 @@ def construct_params_matrix(params_list):
 def calc_covariance_matrix(params_matrix):
     #Calculate normalized covariance matrix
         
-    cov_matrix_normalized = np.corrcoef(matrix)
+    cov_matrix_normalized = np.corrcoef(params_matrix)
     
     return cov_matrix_normalized
 
