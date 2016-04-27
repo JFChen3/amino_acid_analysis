@@ -7,6 +7,7 @@ import argparse
 import os
 
 import amino_acid_analysis.analysis as analysis
+import amino_acid_analysis.find_correlation as correlation
 from amino_acid_analysis.properties import hydrophobic_residues, hbond_residues
 
 def plot_all(args):
@@ -14,13 +15,16 @@ def plot_all(args):
     
     cwd = os.getcwd() #Assumes you are in the temperature directory
 
+    params_list = [] #List of all params
+
     for i in args.iter:
         #Find and load files
         os.chdir("%s/1PB7/iteration_%s/%s_0"%(cwd, args.iter[i], args.temp)) ##Hardcoded directory search line, will generalize at some point
         atom_index, res_index, atom_type, res_id = analysis.read_pdb("%s"%args.atom_file)
         pairs = np.loadtxt("%s"%args.pairs_file, usecols=(0, 1))
         params = np.loadtxt("%s"%args.params_file)
-
+        params_list.append(params)
+        
         os.chdir(cwd)
 
         if not os.path.isdir("contact_plots"):
@@ -31,7 +35,13 @@ def plot_all(args):
         CACB_magnitude(pairs, params, res_index, atom_type, iter=i)
         polarity_magnitude(pairs, params, res_index, atom_type, res_id, iter=i)
         CB_contact_type(pairs, params, res_index, atom_type, res_id, iter=i)
-
+        
+    #Find correlated groups, plot against CA/CB and polarity
+    pairs_corr, params_corr = correlation.generate_correlated_groups(pairs, params_list)
+    ##Set as iter+1 temporarily, generalize plotting functions at some point
+    CACB_magnitude(pairs_corr, params_corr, res_index, atom_type, iter=max(args.iter)+1)
+    polarity_magnitude(pairs_corr, params_corr, res_index, atom_type, res_id, iter=max(args.iter)+1)
+    
 ###Convenience functions to generate specific types of plots###
 def CACB_magnitude(pairs, params, res_index, atom_type, iter=0):
     """Plot magnitude of CA epsilons in upper triangle, magnitude of CB epsilons in lower triangle"""
