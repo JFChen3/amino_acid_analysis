@@ -65,7 +65,7 @@ def polarity_magnitude(pairs, params, res_index, atom_type, res_id, iter=0):
     plot_color(hydrophobic_res_index, hbond_res_index, hydrophobic_params, hbond_params, title="Iteration %.0f"%iter, savename="polarity_epsilons_iter%.0f"%iter)
     plot_spread((hydrophobic_params, hbond_params), ("Hydrophobic", "Hydrogen Bond"), title="Epsilon Spread", savename="polarity_eps_spread_iter_%.0f.png"%iter)
 
-def native_magnitude(pairs, params, native_list, iter=0)
+def native_magnitude(pairs, params, native_list, iter=0):
     """Plot native contact epsilons in upper triangle, nonnative contact epsilons in lower triangle"""
     native_pairs, native_params, nonnative_pairs, nonnative_params = analysis.separate_native(pairs, params, native_list)
     plot_color(native_pairs, nonnative_pairs, native_params, nonnative_params, title="Iteration %.0f"%iter, savename="native_epsilons_iter_%.0f.png"%iter)
