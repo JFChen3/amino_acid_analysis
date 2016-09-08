@@ -87,7 +87,7 @@ def separate_cacb(pairs, params, atom_type):
             cb_params.append(params[i])
             cb_count += 1
         else:
-            raise ValueError("Atom not CA or CB")
+           raise ValueError("Atom not CA or CB")
 
     print "Found %.0f CA and %.0f CB contacts"%(ca_count, cb_count)
     
@@ -137,3 +137,32 @@ def separate_polarity(pairs, params, contact_type=None, res_id=None):
     hbond_pairs = np.reshape(hbond_pairs, (hbond_count,2))
     
     return hydrophobic_pairs, hydrophobic_params, hbond_pairs, hbond_params
+
+def separate_native(pairs, params, native_list):
+    """Separate contacts into native and nonnative pairs"""
+
+    native_pairs = []
+    native_params = []
+    nonnative_pairs = []
+    nonnative_params = []
+
+    #Count native and nonnative interactions
+    native_count = 0
+    nonnative_count = 0
+
+    for i in range(np.shape(pairs)[0]):
+        if pairs[i,1] in native_list[native_list[:,0] == pairs[i,0]]: #Find native pairs with same first index, and see if second index is in the array
+            native_pairs.append(pairs[i,:])
+            native_params.append(params[i])
+            native_count += 1
+        else:
+            nonnative_pairs.append(pairs[i,:])
+            nonnative_params.append(params[i])
+            nonnative_count += 1
+
+    print "Found %.0f native and %.0f nonnative contacts"%(native_count, nonnative_count)
+
+    native_pairs = np.reshape(native_pairs, (native_count,2))
+    nonnative_pairs = np.reshape(nonnative_pairs, (nonnative_count,2))
+
+    return native_pairs, native_params, nonnative_pairs, nonnative_params

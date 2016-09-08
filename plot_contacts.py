@@ -19,7 +19,7 @@ def plot_all(args):
 
     for i in args.iter:
         #Find and load files
-        os.chdir("%s/1PB7/iteration_%s/%s_0"%(cwd, args.iter[i], args.temp)) ##Hardcoded directory search line, will generalize at some point
+        os.chdir("%s/iteration_%s/"%(cwd, args.iter[i], args.temp)) ##Hardcoded directory search line, will generalize at some point
         atom_index, res_index, atom_type, res_id = analysis.read_pdb("%s"%args.atom_file)
         pairs = np.loadtxt("%s"%args.pairs_file, usecols=(0, 1))
         params = np.loadtxt("%s"%args.params_file)
@@ -64,6 +64,12 @@ def polarity_magnitude(pairs, params, res_index, atom_type, res_id, iter=0):
 
     plot_color(hydrophobic_res_index, hbond_res_index, hydrophobic_params, hbond_params, title="Iteration %.0f"%iter, savename="polarity_epsilons_iter%.0f"%iter)
     plot_spread((hydrophobic_params, hbond_params), ("Hydrophobic", "Hydrogen Bond"), title="Epsilon Spread", savename="polarity_eps_spread_iter_%.0f.png"%iter)
+
+def native_magnitude(pairs, params, native_list, iter=0)
+    """Plot native contact epsilons in upper triangle, nonnative contact epsilons in lower triangle"""
+    native_pairs, native_params, nonnative_pairs, nonnative_params = analysis.separate_native(pairs, params, native_list)
+    plot_color(native_pairs, nonnative_pairs, native_params, nonnative_params, title="Iteration %.0f"%iter, savename="native_epsilons_iter_%.0f.png"%iter)
+    plot_spread((native_params, nonnative_params), ("native","nonnative"), title="Epsilon Spread", savename="native_eps_spread_iter_%.0f.png"%iter)
 
 def CB_contact_type(pairs, params, res_index, atom_type, res_id, iter=0):
     """Plot magnitude of CB epsilons in upper triangle, contact type in lower triangle"""
